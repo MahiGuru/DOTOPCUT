@@ -1,0 +1,21 @@
+extends layout
+
+block content 
+  h1.display-4.m-b-2 Add OCCASION TYPE
+  div(ng-controller="typeCtrl") 
+    p Click here for Add Products :  
+      a.btn.btn-secondary(href="/") Add Product
+    
+    div.form-group
+      label Occasion Type:
+      input.form-control(type='text' ng-model="occasionType" id="occasionInput")
+    div.form-group
+      label Description :
+      textarea.form-control(row=5 ng-model="occasionDesc" id="occasionDesc")
+    div.form-group
+      label(for='ifile') Select Images :
+      input.form-control(type='file' id='ifile' placeholder='file' file-model="ifile" name='ifile') 
+    div.row
+      div.col-lg-6.col-md-6.col-sm-6
+          button.btn.btn-primary(type='button' ng-click="occasionAdd()") Add Occasion
+      div.col-lg-6.col-md-6.col-sm-6 

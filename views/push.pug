@@ -1,0 +1,14 @@
+extends layout
+
+block content 
+  h1.display-4.m-b-2 
+  div(ng-controller="initController") 
+    form(id='pushForm')
+      div.form-group
+        label(for='ifile') Title
+        input.form-control(type='text' id='title' placeholder='title' name='title' ng-model="title") 
+      div.form-group
+        label(for='ifile') Message
+        textarea.form-control(cols='5' rows='5' id='message' placeholder='Push notification Message here...' name='message' ng-model='message')
+
+      button.btn.btn-primary(type='submit' ng-click='pushClick()') Push

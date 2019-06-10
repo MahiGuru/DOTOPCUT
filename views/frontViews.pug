@@ -1,0 +1,25 @@
+extends layout
+
+block content 
+  h1.display-4.m-b-2 Add Front View Type
+  div(ng-controller="subcatCtrl") 
+    p Click here for ADD Product :  
+      a.btn.btn-secondary(href="/") Add Product
+    p {{selectCategoryId}}
+      div.form-group
+        label Front View Title :
+        input.form-control(type='text' ng-model="subcTitle" id="input")
+      div.form-group
+        label Subcategory Description :
+        textarea.form-control(row=5 ng-model="desc" id="textarea")
+      div.form-group 
+        label Category :
+        select.form-control(ng-model="selectCategoryId" ng-change="selectedItemChanged()" ng-options="operator._id as operator.type for operator in categorys") 
+        
+      div.form-group
+        label(for='ifile') Select Images :
+        input.form-control(type='file' id='ifile' placeholder='file' file-model="ifile" name='ifile') 
+      div.row
+        div.col-lg-6.col-md-6.col-sm-6
+            button.btn.btn-primary(type='button' ng-click="uploadFile()") upload
+        div.col-lg-6.col-md-6.col-sm-6 

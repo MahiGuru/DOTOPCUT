@@ -1,0 +1,122 @@
+extends layout
+
+block content 
+  h1.display-4.m-b-2 Product Upload
+  div(ng-controller="initController")
+    div.aligner(ng-If="showLoader")
+              div.aligner-item 
+                span.glyphicon.glyphicon-refresh.spinning
+                |  Loading...
+    div
+      ul.nav.nav-tabs(role='tablist')
+        li.active(role='presentation')
+          a(href='#home', aria-controls='home', role='tab', data-toggle='tab') Add Product
+        li(role='presentation')
+          a(href='#profile', aria-controls='profile', role='tab', data-toggle='tab') List of Products
+      .tab-content
+        #home.tab-pane.active(role='tabpanel')
+          p Click here for ADD Types :  
+            a.btn.btn-secondary(href="/html/frontViews") Add Front View Types |
+            a.btn.btn-secondary(href="/html/backtype") Add Back type |
+            a.btn.btn-secondary(href="/html/occasiontype") Add Occasion Type |
+            a.btn.btn-secondary(href="/html/clothtype") Add Cloth Type |
+            a.btn.btn-secondary(href="/html/bodytype") Add Body type
+          p {{selectedFrontTypes}}
+    
+          div.form-group
+            label(for='ifile') Select Images :
+            input.form-control(type='file' id='ifile' placeholder='file' file-model="ifile" name='ifile' multiple) 
+            
+          div.form-group
+            label Product Title :
+            input.form-control(type='text' ng-model="prodTitle" id="input")
+
+          div.form-group
+            label Product Description :
+            textarea.form-control(rows=5 ng-model="desc" id="select")
+            
+          //div.form-group 
+            label Front View Type {{ selectedFrontTypes }}:
+            select.form-control(ng-model="selectedFrontTypes" ng-change="selectedItemChanged()" ng-options="operator._id as operator.type for operator in frontViewTypes") 
+          
+          div.form-group
+            h3 Front View Types 
+            div.row  
+              div.col-lg-4(ng-repeat="frontType in frontViewTypes") 
+                input(type="checkbox" checklist-model="selectedFrontViewTypes" name="frontType{{$index}}" id="frontType{{$index}}" checklist-value="frontType._id") 
+                label.checkbox-inline(for="frontType{{$index}}") {{frontType.type}}
+          
+          div.form-group
+            h3 Back View Types
+            div.row  
+              div.col-lg-4(ng-repeat="backtype in backtypes") 
+                input(type="checkbox" checklist-model="selectedBackTypes" name="backtype{{$index}}" id="backtype{{$index}}" checklist-value="backtype._id") 
+                label.checkbox-inline(for="backtype{{$index}}") {{backtype.type}}
+          
+          
+          div.form-group
+            h3 Occasion Types
+            div.row
+              div.col-lg-4(ng-repeat="occasion in occasiontypes") 
+                input(type="checkbox" checklist-model="selectedOccasions" name="occasion{{$index}}" id="occasion{{$index}}" checklist-value="occasion._id") 
+                label.checkbox-inline(for="occasion{{$index}}") {{occasion.type}}
+          div.form-group
+            h3 Cloth Types
+            div.row
+              div.col-lg-4(ng-repeat="cloth in clothtypes") 
+                input(type="checkbox" checklist-model="selectedClothes" name="clothes{{$index}}" id="clothes{{$index}}" checklist-value="cloth._id") 
+                label.checkbox-inline(for="clothes{{$index}}") {{cloth.type}}
+          
+          div.form-group
+            h3 Body Types
+            div.row
+              div.col-lg-4(ng-repeat="bodytype in bodytypes") 
+                input(type="checkbox" checklist-model="selectedBodyTypes" name="bodytype{{$index}}" id="bodytype{{$index}}" checklist-value="bodytype._id") 
+                label.checkbox-inline(for="bodytype{{$index}}") {{bodytype.type}}
+
+          
+          div.row
+            div.col-lg-6.col-md-6.col-sm-6.text-center
+                button.btn.btn-primary(type='button' ng-click="createProduct()")
+                  span(ng-If="!editEnabled") Create Product
+                  span(ng-If="editEnabled") Update Product  
+            div.col-lg-6.col-md-6.col-sm-6 
+
+        #profile.tab-pane(role='tabpanel')
+            
+            div.text-right
+              a.btn.btn-default(ng-click="refreshProducts()") Refresh List
+            .row.boxes
+              .col-sm-12.col-md-3.box(ng-repeat="product in products") 
+                .thumbnail 
+                  div(ng-init="outerIndex = $index")
+                    p.text-right 
+                      a(href="#", ng-click="edit_product(product._id)")
+                        span.glyphicon.glyphicon-pencil &nbsp;
+                      a(href="#", ng-click="remove_product(product._id)")
+                        span.glyphicon.glyphicon-remove
+                    .carousel.slide(data-ride='carousel', id="carousel-example-generic-{{$index}}")
+                      // Wrapper for slides
+                      .carousel-inner(role='listbox' ng-repeat="imgProduct in product.productImages")
+                        .item.imgItem(ng-repeat="img in imgProduct.imgNames", ng-class="{'active': $index == 0}")
+                          a(href="{{imgProduct.path}}/{{img}}", target="blank")
+                            img(src='{{imgProduct.path}}/{{img}}', alt='img alt text', width="100%")
+                          .carousel-caption  
+                          // Controls
+                          a.left.carousel-control(href='#carousel-example-generic-{{outerIndex}}', data-slide='prev')
+                            span.glyphicon.glyphicon-chevron-left
+                          a.right.carousel-control(href='#carousel-example-generic-{{outerIndex}}', data-slide='next')
+                            span.glyphicon.glyphicon-chevron-right
+                  
+                  .caption
+                    h3 {{product.title}}
+                    p {{ product.desc }}
+                    div.heading(ng-if="product.frontViewTypes.length > 0")
+                      h5 Front View Type : 
+                      div(ng-repeat="frontview in product.frontViewTypes") 
+                        p {{frontview.type}}
+                    div.heading(ng-if="product.frontViewTypes.length > 0")
+                      h5 Back View Type : 
+                      div.heading(ng-repeat="backview in product.backTypes")  
+                        p {{backview.type}}
+                    

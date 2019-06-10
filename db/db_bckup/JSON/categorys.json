@@ -1,0 +1,3 @@
+{"__v":0,"_id":{"$oid":"59690c84f26ee104fc6e8108"},"created_at":{"$date":"2017-07-14T18:25:08.256Z"},"desc":"Blouse description goes here....","imgName":"blouse","type":"Blouse","updated_at":{"$date":"2017-07-14T18:25:08.256Z"}}
+{"__v":0,"_id":{"$oid":"59690c8ff26ee104fc6e8109"},"created_at":{"$date":"2017-07-14T18:25:19.832Z"},"desc":"Sarees description goes here....","imgName":"saree","type":"Sarees","updated_at":{"$date":"2017-07-14T18:25:19.832Z"}}
+{"__v":0,"_id":{"$oid":"5973575b85b7045750f7c7cb"},"created_at":{"$date":"2017-07-22T13:47:07.940Z"},"desc":"suitable for Chandra fans","type":"Hourglass","updated_at":{"$date":"2017-07-22T13:47:07.940Z"}}

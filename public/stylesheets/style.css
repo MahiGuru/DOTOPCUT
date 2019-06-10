@@ -1,0 +1,90 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+.form-group {
+    padding: 10px;
+}
+
+.form-group label {
+    padding: 10px;
+}
+
+.form-group input,
+.form-group select {
+    font-size: 12px;
+}
+
+.heading {
+    padding: 5px;
+}
+
+.heading p {
+    margin-left: 10px;
+    color: #999;
+}
+
+.carousel-inner>.item.imgItem>a>img {
+    height: 200px;
+    width: auto;
+}
+
+.thumbnail .caption {
+    height: 300px;
+    overflow: auto;
+    font-size: 12px;
+}
+
+.glyphicon.spinning {
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+.aligner {
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+}
+
+.aligner-item {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
+
+@-webkit-keyframes spin2 {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.box {
+    flex: 1 1 300px;
+}
